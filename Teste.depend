@@ -1,0 +1,51 @@
+# depslib dependency file v1.0
+1701364748 source:d:\ufop\3º período\aedes ii\teste\buscasequencial.c
+	<string.h>
+	<stdlib.h>
+	<stdarg.h>
+	"utils.h"
+	"funcionario.c"
+
+1701363650 d:\ufop\3º período\aedes ii\teste\funcionario.h
+	<stdlib.h>
+	<stdio.h>
+
+1701363737 d:\ufop\3º período\aedes ii\teste\utils.h
+
+1701392409 source:d:\ufop\3º período\aedes ii\teste\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funcionario.h"
+	"buscaSequencial.h"
+	"utils.h"
+
+1701392329 d:\ufop\3º período\aedes ii\teste\funcionario.c
+	"funcionario.h"
+	<string.h>
+	<stdlib.h>
+	<stdarg.h>
+	"utils.h"
+
+1701363861 d:\ufop\3º período\aedes ii\teste\buscasequencial.c
+	"funcionario.h"
+	<string.h>
+	<stdlib.h>
+	<stdarg.h>
+	"utils.h"
+
+1701363721 d:\ufop\3º período\aedes ii\teste\utils.c
+	<stdlib.h>
+	<stdio.h>
+
+1701363721 source:d:\ufop\3º período\aedes ii\teste\utils.c
+	<stdlib.h>
+	<stdio.h>
+
+1701363821 d:\ufop\3º período\aedes ii\teste\buscasequencial.h
+
+1701365531 source:d:\ufop\3º período\aedes ii\teste\buscabinaria.c
+	"funcionario.h"
+	<string.h>
+	<stdlib.h>
+	<stdarg.h>
+
