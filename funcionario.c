@@ -1,8 +1,4 @@
 #include "funcionario.h"
-#include <string.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include "utils.h"
 
 // Retorna tamanho do funcionario em bytes
 int tamanho_registro() {

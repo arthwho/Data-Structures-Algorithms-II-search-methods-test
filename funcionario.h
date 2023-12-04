@@ -1,8 +1,14 @@
-#ifndef FUNCIONARIO_H_INCLUDED
-#define FUNCIONARIO_H_INCLUDED
+#ifndef FUNCIONARIO_H
+#define FUNCIONARIO_H
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
+#include <math.h>
+#include <stdarg.h>
 
 typedef struct Funcionario {
     int cod;
@@ -43,5 +49,4 @@ void shuffle(int *vet,int MAX,int MIN);
 void imprimirBase(FILE *out);
 
 
-
-#endif // FUNCIONARIO_H_INCLUDED
+#endif // FUNCIONARIO_H
