@@ -2,17 +2,38 @@
 
 // Retorna tamanho do funcionario em bytes
 int tamanho_registro() {
-    return sizeof(int)  //cod
-           + sizeof(char) * 50 //nome
-           + sizeof(char) * 15 //cpf
-           + sizeof(char) * 11 //data_nascimento
-           + sizeof(double); //salario
+    return sizeof(TFunc);
 }
 
+int tamanho_arquivo(FILE *arquivo) {
+    if (arquivo == NULL) {
+        perror("Erro ao abrir o arquivo");
+        return -1; // Indica erro
+    }
+
+    fseek(arquivo, 0, SEEK_END); // Move o cursor para o final do arquivo
+    long tamanho_total = ftell(arquivo); 
+
+    if (tamanho_total == -1) {
+        perror("Erro ao obter o tamanho do arquivo");
+        fclose(arquivo);
+        return -1;
+    }
+
+    int num_registros = tamanho_total / tamanho_registro();
+
+    fclose(arquivo);
+    return num_registros;
+}
 
 // Cria funcionario.
 TFunc *funcionario(int cod, char *nome, char *cpf, char *data_nascimento, double salario) {
+    
     TFunc *func = (TFunc *) malloc(sizeof(TFunc));
+    if (!func) {
+        perror("Erro ao alocar memória para funcionário");
+        exit(EXIT_FAILURE);
+    }
     //inicializa espaco de memoria com ZEROS
     if (func) memset(func, 0, sizeof(TFunc));
     //copia valores para os campos de func
@@ -27,12 +48,7 @@ TFunc *funcionario(int cod, char *nome, char *cpf, char *data_nascimento, double
 
 // Salva funcionario no arquivo out, na posicao atual do cursor
 void salva(TFunc *func, FILE *out) {
-    fwrite(&func->cod, sizeof(int), 1, out);
-    //func->nome ao inves de &func->nome, pois string ja eh um ponteiro
-    fwrite(func->nome, sizeof(char), sizeof(func->nome), out);
-    fwrite(func->cpf, sizeof(char), sizeof(func->cpf), out);
-    fwrite(func->data_nascimento, sizeof(char), sizeof(func->data_nascimento), out);
-    fwrite(&func->salario, sizeof(double), 1, out);
+    fwrite(func, sizeof(TFunc), 1, out);
 }
 
 // Le um funcionario do arquivo in na posicao atual do cursor
@@ -74,7 +90,7 @@ void imprime(TFunc *func) {
 void criarBase(FILE *out, int tam){
 
     int vet[tam];
-    TFunc *f;
+    TFunc *Z;
 
     for(int i=0;i<tam;i++)
         vet[i] = i+1;
@@ -83,12 +99,12 @@ void criarBase(FILE *out, int tam){
 
     printf("\nGerando a base de dados...\n");
 
-    for (int i=0;i<tam;i++){
-        f = funcionario(vet[i], "A", "000.000.000-00", "01/01/1980", 3000*i);
-        salva(f, out);
+    for (int i = 0; i < tam; i++) {
+    Z = funcionario(i, "A", "000-XXXX-000", "01/01/1980", 0 * i);
+    salva(Z, out);
+    free(Z);  // Libera a cada iteração para evitar vazamento de memória
     }
 
-    free(f);
 
 }
 

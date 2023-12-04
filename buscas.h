@@ -1,6 +1,7 @@
 #ifndef BUSCABINARIA_H_INCLUDED
 #define BUSCABINARIA_H_INCLUDED
 
+#include "utils.h"
 #include "funcionario.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -14,7 +15,7 @@
 
 //Realiza uma busca binaria por um funcionario na base de dados
 
-TFunc *busca_binaria(int chave, FILE *in, int inicio, int fim);
+TFunc *buscarFuncionario_binariamente(int chave, FILE *arquivo, int tam);
 TFunc *buscaSequencial(int chave, FILE *in);
 
 #endif // BUSCABINARIA_H_INCLUDED

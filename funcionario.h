@@ -1,6 +1,7 @@
 #ifndef FUNCIONARIO_H
 #define FUNCIONARIO_H
 
+#include "utils.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,6 +22,8 @@ typedef struct Funcionario {
 
 // Retorna tamanho do funcionario em bytes
 int tamanho_registro();
+
+int tamanho_arquivo(FILE *arquivo);
 
 // Cria funcionario.
 TFunc *funcionario(int cod, char *nome, char *cpf, char *data_nascimento, double salario);

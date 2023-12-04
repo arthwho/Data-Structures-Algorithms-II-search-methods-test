@@ -15,6 +15,6 @@
 
 
 
-void insertionSort_funcionarios(FILE *arq, int tam);
+void insertionSort(FILE *arq, int tam);
 
 #endif // INSERTIONSORT_H_INCLUDED

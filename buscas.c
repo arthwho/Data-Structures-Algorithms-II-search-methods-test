@@ -2,34 +2,30 @@
 
 //Realiza uma busca binaria por um funcionario na base de dados
 
-TFunc *busca_binaria(int chave, FILE *in, int inicio, int fim) {
+TFunc *buscarFuncionario_binariamente(int chave, FILE *arquivo, int tam) {
+    TFunc *registro = (TFunc *)malloc(sizeof(TFunc));
+    int esq = 0;
+    int dir = tam - 1;
+    int iteracoes = 0;
 
-    TFunc *f = NULL;
-    int cod = -1;
+    while (esq <= dir) {
+        int meio = esq + (dir - esq) / 2;
+        fseek(arquivo, meio * tamanho_registro(), SEEK_SET);
+        fread(registro, sizeof(TFunc), 1, arquivo);
+        iteracoes++;
 
-    while (inicio <= fim && cod != chave) {
-
-        int meio = trunc((inicio + fim) / 2);
-        printf("Inicio: %d; Fim: %d; Meio: %d\n", inicio, fim, meio);
-        fseek(in, (meio -1) * tamanho_registro(), SEEK_SET);
-        f = le(in);
-        cod = f->cod;
-
-        if (f) {
-            if (cod > chave) {
-                fim = meio - 1;
-            } else {
-                inicio = meio + 1;
-            }
+        if (registro->cod == chave) {
+            return registro;
+        } else if (registro->cod < chave) {
+            esq = meio + 1;
+        } else {
+            dir = meio - 1;
         }
     }
-    printf("HELLO");
-    if (cod == chave) {
-        return f;
-    }
-    else return NULL;
-
+    free(registro);
+    return NULL;
 }
+
 
 //Realiza uma busca sequencial por um funcionario na base de dados
 TFunc *buscaSequencial(int chave, FILE *in){
