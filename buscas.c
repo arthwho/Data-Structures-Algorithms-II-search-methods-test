@@ -1,12 +1,25 @@
 #include "buscas.h"   
 
 //Realiza uma busca binaria por um funcionario na base de dados
-
 TFunc *buscarFuncionario_binariamente(int chave, FILE *arquivo, int tam) {
     TFunc *registro = (TFunc *)malloc(sizeof(TFunc));
+    arquivo = fopen("funcionario.dat", "r+b");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir arquivo.\n");
+        exit(1);
+    }
+
     int esq = 0;
     int dir = tam - 1;
     int iteracoes = 0;
+
+    printf("\033[H\033[J");
+    gotoxy(10,3);
+    printf("Digite o codigo a ser buscado: ");
+    scanf("%i",&chave);
+
+    gotoxy(0,5);
+    printf("%-10s %-20s %-20s %-10s %-10s\n\n", "COD", "Funcionario", "CPF", "Data", "Salario");
 
     while (esq <= dir) {
         int meio = esq + (dir - esq) / 2;
@@ -23,9 +36,9 @@ TFunc *buscarFuncionario_binariamente(int chave, FILE *arquivo, int tam) {
         }
     }
     free(registro);
+    fclose(arquivo);
     return NULL;
 }
-
 
 //Realiza uma busca sequencial por um funcionario na base de dados
 TFunc *buscaSequencial(int chave, FILE *in){
@@ -33,7 +46,7 @@ TFunc *buscaSequencial(int chave, FILE *in){
     TFunc *f;
     int achou;
 
-    system("cls");
+    printf("\033[H\033[J");
     gotoxy(10,3);
     printf("Digite o codigo a ser buscado: ");
     scanf("%d", &chave);
@@ -56,4 +69,5 @@ TFunc *buscaSequencial(int chave, FILE *in){
         else printf("Funcionario nao encontrado");
 
     free(f);
+    fclose(in);
 }

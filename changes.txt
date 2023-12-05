@@ -1,8 +1,0 @@
-Busca Binária (busca_binaria):
-Ajustada a leitura do registro utilizando a função le para garantir uma leitura correta;
-A liberação de memória é realizada apenas no final da função para evitar perda do último registro lido.
-
-Insertion Sort (insertionSort_funcionarios): #ainda nao funcionando, precisa ser ajustado para a estrutura (verifique como voce esta salvando)
-Leitura do Registro;
-Escrita dos Registros Ordenados;
-Validação da Abertura do Arquivo.

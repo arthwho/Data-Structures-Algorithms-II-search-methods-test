@@ -2,7 +2,11 @@
 
 void insertionSort(FILE *arq, int tam) {
     TFunc *funcionarios = (TFunc *)malloc(tam * sizeof(TFunc));
-    fopen("funcionario.dat", "w+b");
+    arq = fopen("funcionario.dat", "r+b");
+    if (arq == NULL) {
+        printf("Erro ao abrir arquivo.\n");
+        exit(1);
+    }
     printf("Debug: Insertion Sort Funcionarios Iniciado, tam = %d\n", tam);
 
     // Read all records into an array
@@ -29,7 +33,6 @@ void insertionSort(FILE *arq, int tam) {
     }
 
     // Write the sorted array back to the file
-    
     fseek(arq, 0, SEEK_SET);
     for (int i = 0; i < tam; i++) {
         fwrite(&funcionarios[i].cod, sizeof(int), 1, arq);

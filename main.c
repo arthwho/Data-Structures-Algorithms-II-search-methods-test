@@ -3,7 +3,6 @@
 #include "utils.h"
 #include "insertionSort.h"
 
-
 //code .
 //gcc -o main ./*.c
 
@@ -16,7 +15,7 @@ int main()
 
     while (1){
 
-        system("cls");
+        printf("\033[H\033[J");
         if ((arq = fopen("funcionario.dat", "w+b")) == NULL) {
         printf("Erro ao abrir arquivo\n");
         exit(1);
@@ -34,9 +33,10 @@ int main()
             gotoxy(20,14);
             printf("3. Realizar busca binaria: \n");
             gotoxy(20,16);
-            printf("4. Realizar inseriton sort: \n");
+            printf("4. Realizar insertion sort: \n");
+            gotoxy(20,18);
             printf("0. Sair: \n");
-            gotoxy(20,19);
+            gotoxy(20,20);
             printf("Digite a opcao desejada: ");
             scanf("%d", &op);
 
@@ -53,17 +53,10 @@ int main()
             case 2:
                 f = buscaSequencial(0, arq);
                 imprime(f);
-
                 break;
 
             case 3:
-                printf("\033[H\033[J");
-
-
-                printf("\nDigite o codigo a ser buscado: ");
-                scanf("%i",&codigoBusca);
-
-                f = buscarFuncionario_binariamente(codigoBusca, arq, tamanho_arquivo(arq));
+                f = buscarFuncionario_binariamente(0, arq, tamanho_arquivo(arq));
                 if (f != NULL)   
                     imprime(f);
                     
