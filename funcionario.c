@@ -97,15 +97,13 @@ void criarBase(FILE *out, int tam){
 
     shuffle(vet,tam,(tam*60)/100);
 
-    printf("\nGerando a base de dados...\n");
+    printf("\nGerando a base de dados de funcionarios...\n");
 
     for (int i = 0; i < tam; i++) {
     Z = funcionario(i, "A", "000-XXXX-000", "01/01/1980", 0 * i);
     salva(Z, out);
     free(Z);  // Libera a cada iteração para evitar vazamento de memória
     }
-
-
 }
 
 //embaralha base de dados
@@ -122,7 +120,7 @@ void shuffle(int *vet,int MAX,int MIN) {
 
 void imprimirBase(FILE *out){
 
-system("cls");
+printf("\033[H\033[J");
 gotoxy(10,1);
 printf("\nImprimindo a base de dados...\n\n");
 gotoxy(0,5);

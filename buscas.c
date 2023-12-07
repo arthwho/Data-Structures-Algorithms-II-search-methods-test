@@ -53,7 +53,7 @@ TFunc *buscaSequencial(int chave, FILE *in){
 
     gotoxy(0,5);
     printf("%-10s %-20s %-20s %-10s %-10s\n\n", "COD", "Funcionario", "CPF", "Data", "Salario");
-
+    
     rewind(in);
 
     while ((f = le(in)) != NULL){
@@ -70,4 +70,5 @@ TFunc *buscaSequencial(int chave, FILE *in){
 
     free(f);
     fclose(in);
+    
 }
