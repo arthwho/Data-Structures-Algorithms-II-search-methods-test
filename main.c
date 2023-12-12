@@ -43,9 +43,13 @@ int main()
             gotoxy(15,9);
             printf("3. Realizar busca binaria de funcionario: ");
             gotoxy(15,11);
-            printf("4. Realizar insertion sort: ");
+            printf("4. Realizar insertion sort de funcionarios: ");
             gotoxy(70,5);
             printf("5. Imprimir base de dados de livros: ");
+            gotoxy(70,7);
+            printf("6. Realizar busca binaria de livro: ");
+            gotoxy(70,9);
+            printf("7. Realizar insertion sort de livros: ");
             gotoxy(15,17);
             printf("0. Sair: ");
             gotoxy(15,20);
@@ -90,6 +94,23 @@ int main()
                 break;
 
             case 5:
+                imprimirBaseDeLivros(Larq);
+                break;
+
+            case 6:
+                start = clock();
+                l = buscarLivro_binariamente(0, Larq, tamanho_arquivo_livro(Larq), NULL);
+                if (l != NULL)   
+                    imprimeLivro(l);
+
+                end = clock();
+                cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+                printf("\nTempo de execucao: %f\n", cpu_time_used);
+                fflush(stdout);
+                break;
+
+            case 7:
+                insertionSort_livros(Larq, tamanho_arquivo_livro(Larq));
                 imprimirBaseDeLivros(Larq);
                 break;
 

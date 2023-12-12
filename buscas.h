@@ -3,6 +3,7 @@
 
 #include "utils.h"
 #include "funcionario.h"
+#include "livro.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,5 +17,7 @@
 TFunc *buscarFuncionario_binariamente(int chave, FILE *arquivo, int tam);
 //Realiza uma busca sequencial por um funcionario na base de dados
 TFunc *buscaSequencial(int chave, FILE *in);
+void salvar_log_file_binary(FILE *out, int iteracoes, double tempo_ms);
+TLivro *buscarLivro_binariamente(int chave, FILE *arquivo, int tam, FILE *LogFileBinary);
 
 #endif // BUSCABINARIA_H_INCLUDED

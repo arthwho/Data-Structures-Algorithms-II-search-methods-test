@@ -10,7 +10,6 @@ typedef struct Livro{
     int id;
     char titulo[50];
     char autor[50];
-    TFunc funcionario;
 } TLivro;
 
 // Retorna tamanho do livro em bytes
@@ -19,7 +18,7 @@ int tamanho_registro_livro();
 int tamanho_arquivo_livro(FILE *arquivo);
 
 // Cria funcionario.
-TLivro *livro(int id, char *titulo, char *autor, TFunc *funcionario);
+TLivro *livro(int id, char *titulo, char *autor);
 
 // Salva funcionario no arquivo out, na posicao atual do cursor
 void salvaLivro(TLivro *livro, FILE *saida);
@@ -35,7 +34,7 @@ void imprimeLivro(TLivro *livro);
 void criarBaseDeLivros(FILE *saida, int tamanho);
 
 //embaralha base de dados
-//void shuffle(int *vet,int MAX,int MIN);
+void shuffle_livro(int *vet, int size);
 
 // Imprime a base de dados
 void imprimirBaseDeLivros(FILE *saida);

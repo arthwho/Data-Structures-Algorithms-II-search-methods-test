@@ -3,6 +3,7 @@
 
 #include "utils.h"
 #include "funcionario.h"
+#include "livro.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,5 +14,6 @@
 #include <stdarg.h>
 
 void insertionSort(FILE *arq, int tam);
+void insertionSort_livros(FILE *arq, int tam);
 
 #endif // INSERTIONSORT_H_INCLUDED

@@ -1,14 +1,14 @@
 #include "livro.h"
 
-void shuffle_livro(int *vet, int size) {
-    srand(time(NULL));
-    for (int i = size - 1; i > 0; i--) {
-        int j = rand() % (i + 1);
-        int tmp = vet[j];
-        vet[j] = vet[i];
-        vet[i] = tmp;
-    }
-}
+// void shuffle_livro(int *vet, int size) {
+//     srand(time(NULL));
+//     for (int i = size - 1; i > 0; i--) {
+//         int j = rand() % (i + 1);
+//         int tmp = vet[j];
+//         vet[j] = vet[i];
+//         vet[i] = tmp;
+//     }
+// }
 
 int tamanho_registro_livro() {
     return sizeof(TLivro);
@@ -20,7 +20,7 @@ int tamanho_arquivo_livro(FILE *Larquivo) {
     return tam;
 }
 
-TLivro *criar_livro(int id, char *titulo, char *autor, TFunc funcionario) {
+TLivro *criar_livro(int id, char *titulo, char *autor) {
     
     TLivro *livro = (TLivro *) malloc(sizeof(TLivro));
     if (livro) memset(livro, 0, sizeof(TLivro));
@@ -28,7 +28,6 @@ TLivro *criar_livro(int id, char *titulo, char *autor, TFunc funcionario) {
     strcpy(livro->titulo, titulo);
     strcpy(livro->autor, autor);
 
-    livro->funcionario = funcionario;
     return livro;
 }
 
@@ -53,46 +52,42 @@ void imprimeLivro(TLivro *livro) {
     //printf("Autor: %s\n", livro->autor);
     //printf("Funcionario: %s\n", livro->funcionario->nome);
 
-    printf("%-10d %-20s %-20s %-10s\n\n", livro->id, livro->titulo, livro->autor, livro->funcionario.nome);
+    printf("%-10d %-20s %-20s\n\n", livro->id, livro->titulo, livro->autor);
 }
 
 void criarBaseDeLivros(FILE *saida, int tamanho) {
 
     int vet[tamanho];
-    TLivro *livro;
-    TFunc *f /*= (TFunc *) malloc(sizeof(TFunc))*/;
-
-
-    f = funcionario(1, "Funcionario", "000.000.000-00", "01/01/2000", 1000);
-    salva(f, saida);
+    TLivro *K;
 
     for (int i = 0; i < tamanho; i++)
         vet[i] = i + 1;
 
-    shuffle_livro(vet, tamanho);
+    shuffle(vet, tamanho);
 
     for (int i = 0; i < tamanho; i++) {
-        livro = criar_livro(vet[i], "Titulo", "Autor Desconhecido", *f);
-        salvaLivro(livro, saida);
+        K = criar_livro(vet[i], "Titulo", "Autor Desconhecido");
+        salvaLivro(K, saida);
+        free(K);
     }
-    free(livro);
 }
 
 void imprimirBaseDeLivros(FILE *saida) {
-
-    if (saida == NULL) {
-            printf("Erro ao abrir arquivo.\n");
-            exit(1);
-        }
-
+    
+    system("cls");
     printf("\033[H\033[J");
     gotoxy(10,1);
     printf("\nImprimindo a base de dados de livros...\n\n");
     gotoxy(0,5);
 
+    // if (saida == NULL) {
+    //         printf("Erro ao abrir arquivo.\n");
+    //         exit(1);
+    //     }
+
         rewind(saida);
         TLivro *l;
-        printf("%-10s %-20s %-20s %-10s\n\n", "ID", "Titulo", "Autor", "Funcionario");
+        printf("%-10s %-20s %-20s\n\n", "ID", "Titulo", "Autor");
 
         while ((l = leLivro(saida)) != NULL)
 

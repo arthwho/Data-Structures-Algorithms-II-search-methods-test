@@ -48,4 +48,30 @@ void insertionSort(FILE *arq, int tam) {
     fflush(arq);
 }
 
+void insertionSort_livros(FILE *arq, int tam) {
+    TLivro *livros = (TLivro *)malloc(tam * sizeof(TLivro));
+    fseek(arq, 0, SEEK_SET);
+    for (int i = 0; i < tam; i++) {
+        fread(&livros[i], sizeof(TLivro), 1, arq);
+    }
+    for (int j = 1; j < tam; j++) {
+        TLivro key = livros[j];
+        int i = j - 1;
 
+        while (i >= 0 && livros[i].id > key.id) {
+            livros[i + 1] = livros[i];
+            i--;
+        }
+
+        livros[i + 1] = key;
+    }
+    fseek(arq, 0, SEEK_SET);
+    for (int i = 0; i < tam; i++) {
+        fwrite(&livros[i], sizeof(TLivro), 1, arq);
+    }
+    //printLivroCodes(arq, tam); //debug only
+    free(livros);
+
+    printf("Debug: Insertion Sort Livros Finalizado\n");
+    fflush(arq);
+}

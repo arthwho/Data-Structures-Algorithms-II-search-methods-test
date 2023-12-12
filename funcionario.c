@@ -95,7 +95,7 @@ void criarBase(FILE *out, int tam){
     for(int i=0;i<tam;i++)
         vet[i] = i+1;
 
-    shuffle(vet,tam,(tam*60)/100);
+    shuffle(vet, tam);
 
     printf("\nGerando a base de dados de funcionarios...\n");
 
@@ -107,10 +107,10 @@ void criarBase(FILE *out, int tam){
 }
 
 //embaralha base de dados
-void shuffle(int *vet,int MAX,int MIN) {
+void shuffle(int *vet, int size) {
     srand(time(NULL));
-    for (int i = MAX - MIN - 1; i > 0; i--) {
-        int j = rand() % (i);
+    for (int i = size - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
         int tmp = vet[j];
         vet[j] = vet[i];
         vet[i] = tmp;

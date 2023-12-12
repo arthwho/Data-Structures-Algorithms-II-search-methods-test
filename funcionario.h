@@ -40,7 +40,7 @@ void imprime(TFunc *func);
 void criarBase(FILE *out, int tam);
 
 //embaralha base de dados
-void shuffle(int *vet,int MAX,int MIN);
+void shuffle(int *vet, int size);
 
 // Imprime a base de dados
 void imprimirBase(FILE *out);

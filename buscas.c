@@ -1,5 +1,10 @@
 #include "buscas.h"   
 
+typedef struct LogFileBinary{
+    int iteracoes;
+    double tempo_ms;
+} TLogBinary;
+
 //Realiza uma busca binaria por um funcionario na base de dados
 TFunc *buscarFuncionario_binariamente(int chave, FILE *arquivo, int tam) {
     TFunc *registro = (TFunc *)malloc(sizeof(TFunc));
@@ -71,4 +76,51 @@ TFunc *buscaSequencial(int chave, FILE *in){
     free(f);
     fclose(in);
     
+}
+
+void salvar_log_file_binary(FILE *out, int iteracoes, double tempo_ms) {
+    TLogBinary *e = (TLogBinary *)malloc(sizeof(TLogBinary));
+    e->iteracoes = iteracoes;
+    e->tempo_ms = tempo_ms;
+    fwrite(&e->iteracoes, sizeof(int), 1, out);
+    fwrite(&e->tempo_ms, sizeof(int), 1, out);
+
+    free(e);
+}
+
+TLivro *buscarLivro_binariamente(int chave, FILE *arquivo, int tam, FILE *LogFileBinary) {
+    TLivro *registro = (TLivro *)malloc(sizeof(TLivro));
+    arquivo = fopen("livro.dat", "r+b");
+    int esq = 0;
+    int dir = tam - 1;
+    int iteracoes = 0;
+
+    printf("\033[H\033[J");
+    gotoxy(10,3);
+    printf("Digite o codigo a ser buscado: ");
+    scanf("%i",&chave);
+
+    clock_t start_time = clock(); // Marca o início do tempo de execução
+
+    while (esq <= dir) {
+        int meio = esq + (dir - esq) / 2;
+        fseek(arquivo, meio * tamanho_registro_livro(), SEEK_SET);
+        fread(registro, sizeof(TLivro), 1, arquivo);
+        iteracoes++;
+
+        if (registro->id == chave) {
+            double elapsed_time = (double)(clock() - start_time) / CLOCKS_PER_SEC * 1000.0;
+            salvar_log_file_binary(LogFileBinary, iteracoes, elapsed_time);
+            return registro;
+
+        } else if (registro->id < chave) {
+            esq = meio + 1;
+        } else {
+            dir = meio - 1;
+        }
+    }
+
+    free(registro);
+    fclose(arquivo);
+    return NULL;
 }
