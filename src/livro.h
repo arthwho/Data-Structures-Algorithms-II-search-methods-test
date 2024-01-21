@@ -17,17 +17,17 @@ int tamanho_registro_livro();
 
 int tamanho_arquivo_livro(FILE *arquivo);
 
-// Cria funcionario.
+// Cria livro.
 TLivro *livro(int id, char *titulo, char *autor);
 
-// Salva funcionario no arquivo out, na posicao atual do cursor
+// Salva livro no arquivo out, na posicao atual do cursor
 void salvaLivro(TLivro *livro, FILE *saida);
 
-// Le um funcionario do arquivo in na posicao atual do cursor
-// Retorna um ponteiro para funcionario lido do arquivo
+// Le um livro do arquivo in na posicao atual do cursor
+// Retorna um ponteiro para livro lido do arquivo
 TLivro *leLivro(FILE *entrada);
 
-// Imprime funcionario
+// Imprime livro
 void imprimeLivro(TLivro *livro);
 
 // Cria a base de dados

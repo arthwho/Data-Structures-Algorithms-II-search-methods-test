@@ -15,9 +15,24 @@ int tamanho_registro_livro() {
 }
 
 int tamanho_arquivo_livro(FILE *Larquivo) {
-    fseek(Larquivo, 0, SEEK_END);
-    int tam = ftell(Larquivo) / tamanho_registro_livro();
-    return tam;
+    if (Larquivo == NULL) {
+        perror("Erro ao abrir o arquivo");
+        return -1; // Indica erro
+    }
+
+    fseek(Larquivo, 0, SEEK_END); // Move o cursor para o final do arquivo
+    long tamanho_total = ftell(Larquivo); 
+
+    if (tamanho_total == -1) {
+        perror("Erro ao obter o tamanho do arquivo");
+        fclose(Larquivo);
+        return -1;
+    }
+
+    int num_registros = tamanho_total / tamanho_registro_livro();
+
+    fclose(Larquivo);
+    return num_registros;
 }
 
 TLivro *criar_livro(int id, char *titulo, char *autor) {
@@ -46,13 +61,14 @@ TLivro *leLivro(FILE *entrada) {
     return livro;
 }
 
-void imprimeLivro(TLivro *livro) {
+//Imprime um livro
+void imprimeLivro(TLivro *j) {
     //printf("ID: %d\n", livro->id);
     //printf("Titulo: %s\n", livro->titulo);
     //printf("Autor: %s\n", livro->autor);
     //printf("Funcionario: %s\n", livro->funcionario->nome);
-
-    printf("%-10d %-20s %-20s\n\n", livro->id, livro->titulo, livro->autor);
+    
+    printf("%-10d %-20s %-20s\n\n", j->id, j->titulo, j->autor);
 }
 
 void criarBaseDeLivros(FILE *saida, int tamanho) {
@@ -68,8 +84,9 @@ void criarBaseDeLivros(FILE *saida, int tamanho) {
     for (int i = 0; i < tamanho; i++) {
         K = criar_livro(vet[i], "Titulo", "Autor Desconhecido");
         salvaLivro(K, saida);
-        free(K);
     }
+
+    free(K);
 }
 
 void imprimirBaseDeLivros(FILE *saida) {

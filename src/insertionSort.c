@@ -44,16 +44,28 @@ void insertionSort(FILE *arq, int tam) {
 
     free(funcionarios);
 
-    printf("Debug: Insertion Sort Funcionarios Finalizado\n");
+    //printf("Debug: Insertion Sort Funcionarios Finalizado\n");
     fflush(arq);
 }
 
 void insertionSort_livros(FILE *arq, int tam) {
     TLivro *livros = (TLivro *)malloc(tam * sizeof(TLivro));
+    arq = fopen(BOOK_FILE_PATH, "r+b");
+    if (arq == NULL) {
+        printf("Erro ao abrir arquivo.\n");
+        exit(1);
+    }
+    printf("Debug: Insertion Sort Livros Iniciado, tam = %d\n", tam);
+
+    // Read all records into an array
     fseek(arq, 0, SEEK_SET);
     for (int i = 0; i < tam; i++) {
-        fread(&livros[i], sizeof(TLivro), 1, arq);
+        fread(&livros[i].id, sizeof(int), 1, arq);
+        fread(livros[i].titulo, sizeof(char), sizeof(livros[i].titulo), arq);
+        fread(livros[i].autor, sizeof(char), sizeof(livros[i].titulo), arq);
     }
+
+    // Perform insertion sort on the array
     for (int j = 1; j < tam; j++) {
         TLivro key = livros[j];
         int i = j - 1;
@@ -65,13 +77,17 @@ void insertionSort_livros(FILE *arq, int tam) {
 
         livros[i + 1] = key;
     }
+
+    // Write the sorted array back to the file
     fseek(arq, 0, SEEK_SET);
     for (int i = 0; i < tam; i++) {
-        fwrite(&livros[i], sizeof(TLivro), 1, arq);
+        fwrite(&livros[i].id, sizeof(int), 1, arq);
+        fwrite(livros[i].titulo, sizeof(char), sizeof(livros[i].titulo), arq);
+        fwrite(livros[i].autor, sizeof(char), sizeof(livros[i].autor), arq);
     }
-    //printLivroCodes(arq, tam); //debug only
+
     free(livros);
 
-    printf("Debug: Insertion Sort Livros Finalizado\n");
+    //printf("Debug: Insertion Sort Funcionarios Finalizado\n");
     fflush(arq);
 }

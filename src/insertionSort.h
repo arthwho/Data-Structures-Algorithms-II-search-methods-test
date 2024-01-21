@@ -6,12 +6,11 @@
 #include "livro.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 #include <time.h>
 #include <math.h>
 #include <stdarg.h>
+#include "quickSort.h"
 
 void insertionSort(FILE *arq, int tam);
 void insertionSort_livros(FILE *arq, int tam);

@@ -1,4 +1,0 @@
-Adicionado a busca binaria de livros e insertion sort, junto de algumas alterações no código geral.
-
-# Busca binaria de livros ainda nao funcionando
-# A base de funcionarios nao esta mais sendo criada de forma desordenada, checar novamente a função shuffle.

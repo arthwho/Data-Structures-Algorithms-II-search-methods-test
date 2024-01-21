@@ -3,17 +3,15 @@
 #include "utils.h"
 #include "insertionSort.h"
 #include "livro.h"
-
-//code .
-//gcc -o main ./*.c
+#include "intercalacao.h"
+#include "classificacao.h"
 
 int main()
 {
-    FILE *arq,*Larq;
-    TFunc *f;
-    TLivro *l;
-    f = (TFunc *)malloc(sizeof(TFunc));
-    l = (TLivro *)malloc(sizeof(TLivro));
+    FILE *arq,*Larq,*log;
+    TFunc *f = (TFunc *)malloc(sizeof(TFunc));
+    TLivro *l = (TLivro *)malloc(sizeof(TLivro));
+
     clock_t start, end;
     double cpu_time_used;
 
@@ -21,12 +19,16 @@ int main()
 
         printf("\033[H\033[J");
 
-        if ((arq = fopen("funcionario.dat", "w+b")) == NULL) {
+        if ((arq = fopen(EMPLOYEE_FILE_PATH, "w+b")) == NULL) {
         printf("Erro ao abrir arquivo de funcionarios\n");
         exit(1);
         }
-        if ((Larq = fopen("livro.dat", "w+b")) == NULL) {
+        if ((Larq = fopen(BOOK_FILE_PATH, "w+b")) == NULL) {
         printf("Erro ao abrir arquivo de livros\n");
+        exit(1);
+        }
+        if ((log = fopen(LOG_FILE_PATH, "w+b")) == NULL) {
+        printf("Erro ao abrir arquivo de logs\n");
         exit(1);
         }
 
@@ -50,9 +52,17 @@ int main()
             printf("6. Realizar busca binaria de livro: ");
             gotoxy(70,9);
             printf("7. Realizar insertion sort de livros: ");
+            gotoxy(70,11);
+            printf("8. Realizar quick sort de funcionarios e livros:");
+            gotoxy(15,15);
+            printf("9. Realizar classificacao de funcionarios: ");
+            gotoxy(70,15);
+            printf("10. Realizar classificacao de livros: ");
             gotoxy(15,17);
-            printf("0. Sair: ");
+            printf("11. Realizar intercalacao otima: ");
             gotoxy(15,20);
+            printf("0. Sair: ");
+            gotoxy(15,22);
             printf("Digite a opcao desejada: ");
             scanf("%d", &op);
 
@@ -78,7 +88,7 @@ int main()
 
             case 3:
                 start = clock();
-                f = buscarFuncionario_binariamente(0, arq, tamanho_arquivo(arq));
+                f = buscarFuncionario_binariamente(0, arq, tamanho_arquivo(arq), log);
                 if (f != NULL)   
                     imprime(f);
 
@@ -99,8 +109,8 @@ int main()
 
             case 6:
                 start = clock();
-                l = buscarLivro_binariamente(0, Larq, tamanho_arquivo_livro(Larq), NULL);
-                if (l != NULL)   
+                l = buscarLivro_binariamente(10, Larq, tamanho_arquivo_livro(Larq), log);
+                if (l != NULL) 
                     imprimeLivro(l);
 
                 end = clock();
@@ -112,6 +122,25 @@ int main()
             case 7:
                 insertionSort_livros(Larq, tamanho_arquivo_livro(Larq));
                 imprimirBaseDeLivros(Larq);
+                break;
+
+            case 8:
+                quicksort_both();
+                //imprimirBase(arq);
+                printLivroCodes(Larq, tamanho_arquivo_livro(Larq));
+                //printFuncCodes(arq, tamanho_arquivo(arq));
+                break;
+
+            case 9:
+                classificacao_interna_Func(100);
+                break;
+
+            case 10:
+                classificacao_interna_Livro(100);
+                break;
+
+            case 11:
+                intercalacoes_otimas();
                 break;
 
             default:

@@ -17,7 +17,6 @@ typedef struct Funcionario {
     double salario;
 } TFunc;
 
-
 // Retorna tamanho do funcionario em bytes
 int tamanho_registro();
 

@@ -1,0 +1,6 @@
+Adicionado os algoritmos de classificação, intercalação e quick sort, assim como alterações em "utils.h".
+
+# Busca binária de livros ainda não funcionando. Problema parece ser com a função de imprimir o livro,
+mas ela funciona perfeitamente ao imprimir a base.
+
+# Algoritmo de classificação não funcionando corretamente.
