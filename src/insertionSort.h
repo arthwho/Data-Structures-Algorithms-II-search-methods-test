@@ -1,14 +1,7 @@
 #ifndef INSERTIONSORT_H_INCLUDED
 #define INSERTIONSORT_H_INCLUDED
 
-#include "utils.h"
-#include "funcionario.h"
-#include "livro.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
-#include <math.h>
+#include "estruturas.h"
 #include <stdarg.h>
 #include "quickSort.h"
 

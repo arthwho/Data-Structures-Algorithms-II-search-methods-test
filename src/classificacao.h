@@ -1,15 +1,8 @@
 #ifndef CLASSIFICACAO_H
 #define CLASSIFICACAO_H
 
-#include "utils.h"
-#include "funcionario.h"
-#include "livro.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
-#include <math.h>
-#include <stdarg.h>
+#include "estruturas.h"
+
 
 typedef struct{
 

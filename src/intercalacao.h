@@ -1,22 +1,9 @@
 #ifndef INTERCALACAO_H_INCLUDED
 #define INTERCALACAO_H_INCLUDED
 
-#include "utils.h"
-#include "funcionario.h"
-#include "livro.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
-#include <math.h>
-#include <stdarg.h>
+#include "estruturas.h"
 
-/**
- * @brief enum para as funções genéricas de comparação
- * 
- * @param FUNCIONARIO TFunc
- * @param LIVRO TLivro
- */
+// enum para as funções genéricas de comparação
 typedef enum {
     FUNCIONARIO,
     LIVRO

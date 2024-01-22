@@ -1,8 +1,7 @@
+#include "estruturas.h" 
+
 #include "buscas.h"
-#include "funcionario.h"
-#include "utils.h"
 #include "insertionSort.h"
-#include "livro.h"
 #include "intercalacao.h"
 #include "classificacao.h"
 

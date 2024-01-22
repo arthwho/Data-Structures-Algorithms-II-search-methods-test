@@ -1,0 +1,43 @@
+In file included from .\src\buscas.h:4:0,
+                 from .\src\buscas.c:1:
+.\src\estruturas.h:41:5: error: unknown type name 'TFunc'
+     TFunc *funcionario;
+     ^~~~~
+In file included from .\src\classificacao.h:4:0,
+                 from .\src\classificacao.c:1:
+.\src\estruturas.h:41:5: error: unknown type name 'TFunc'
+     TFunc *funcionario;
+     ^~~~~
+In file included from .\src\estruturas.c:1:0:
+.\src\estruturas.h:41:5: error: unknown type name 'TFunc'
+     TFunc *funcionario;
+     ^~~~~
+In file included from .\src\insertionSort.h:4:0,
+                 from .\src\insertionSort.c:1:
+.\src\estruturas.h:41:5: error: unknown type name 'TFunc'
+     TFunc *funcionario;
+     ^~~~~
+In file included from .\src\intercalacao.h:4:0,
+                 from .\src\intercalacao.c:1:
+.\src\estruturas.h:41:5: error: unknown type name 'TFunc'
+     TFunc *funcionario;
+     ^~~~~
+In file included from .\src\main.c:1:0:
+.\src\estruturas.h:41:5: error: unknown type name 'TFunc'
+     TFunc *funcionario;
+     ^~~~~
+.\src\main.c: In function 'main':
+.\src\main.c:127:17: warning: implicit declaration of function 'quicksort_both' [-Wimplicit-function-declaration]
+                 quicksort_both();
+                 ^~~~~~~~~~~~~~
+.\src\main.c:129:17: warning: implicit declaration of function 'printLivroCodes' [-Wimplicit-function-declaration]
+                 printLivroCodes(Larq, tamanho_arquivo_livro(Larq));
+                 ^~~~~~~~~~~~~~~
+.\src\main.c:149:13: warning: implicit declaration of function 'getch' [-Wimplicit-function-declaration]
+             getch();
+             ^~~~~
+In file included from .\src\quickSort.h:4:0,
+                 from .\src\quickSort.c:2:
+.\src\estruturas.h:41:5: error: unknown type name 'TFunc'
+     TFunc *funcionario;
+     ^~~~~
