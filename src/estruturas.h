@@ -33,16 +33,6 @@ void gotoxy(int x,int y);
  * Structs
 **************************************************/
 
-typedef struct livro{
-    int id;
-    char titulo[50];
-    char autor[50];
-
-    TFunc *funcionario;
-
-} TLivro;
-
-
 typedef struct funcionario{
     int cod;
     char nome[50];
@@ -51,21 +41,13 @@ typedef struct funcionario{
     double salario;
 } TFunc;
 
-/*************************************************
- * Funcoes de Livro
-**************************************************/
+typedef struct livro{
+    int id;
+    char titulo[50];
+    char autor[50];
+    TFunc *funcionario;
 
-int tamanho_registro_livro();
-int tamanho_arquivo_livro(FILE *arquivo);
-
-TLivro *livro(int id, char *titulo, char *autor, TFunc *funcionario);
-TLivro *leLivro(FILE *entrada); // Ler o funcionario
-
-void salvaLivro(TLivro *livro, FILE *saida); // Salvar o funcionario
-void imprimeLivro(TLivro *livro); // Imprimir o funcionario
-void criarBaseDeLivros(FILE *saida, int tamanho); // Incluir o funcionario
-void shuffle_livro(int *vet, int size); // Muda se precisar
-void imprimirBaseDeLivros(FILE *saida); // Mudar
+} TLivro;
 
 /*************************************************
  * Funcoes de Funcionario
@@ -83,5 +65,22 @@ void imprime(TFunc *func);
 void criarBase(FILE *out, int tam);
 void shuffle(int *vet, int size);
 void imprimirBase(FILE *out);
+
+/*************************************************
+ * Funcoes de Livro
+**************************************************/
+
+int tamanho_registro_livro();
+int tamanho_arquivo_livro(FILE *arquivo);
+
+TLivro *livro(int id, char *titulo, char *autor, TFunc *funcionario);
+TLivro *criar_livro(int id, char *titulo, char *autor, TFunc *func);
+TLivro *leLivro(FILE *entrada); // Ler o funcionario
+
+void salvaLivro(TLivro *livro, FILE *saida); // Salvar o funcionario
+void imprimeLivro(TLivro *livro); // Imprimir o funcionario
+void criarBaseDeLivros(FILE *saida, int tamanho); // Incluir o funcionario
+void shuffle_livro(int *vet, int size); // Muda se precisar
+void imprimirBaseDeLivros(FILE *saida); // Mudar
 
 #endif // ESTRUTURAS_H
