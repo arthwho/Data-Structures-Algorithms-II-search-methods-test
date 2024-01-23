@@ -1,4 +1,4 @@
-#include "intercalacao.h"
+#include "estruturas.h"
 
 int compare_records(const void *a, const void *b, TipoRegistro tipo) {
     switch (tipo) {

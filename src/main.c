@@ -1,8 +1,6 @@
 #include "estruturas.h" 
 
 #include "buscas.h"
-#include "insertionSort.h"
-#include "intercalacao.h"
 #include "classificacao.h"
 
 int main()

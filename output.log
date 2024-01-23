@@ -1,0 +1,30 @@
+./src/main.c:4:10: fatal error: insertionSort.h: No such file or directory
+    4 | #include "insertionSort.h"
+      |          ^~~~~~~~~~~~~~~~~
+compilation terminated.
+./src/main.c: In function ‘main’:
+./src/main.c:125:17: warning: implicit declaration of function ‘quicksort_both’ [-Wimplicit-function-declaration]
+  125 |                 quicksort_both();
+      |                 ^~~~~~~~~~~~~~
+./src/main.c:127:17: warning: implicit declaration of function ‘printLivroCodes’ [-Wimplicit-function-declaration]
+  127 |                 printLivroCodes(Larq, tamanho_arquivo_livro(Larq));
+      |                 ^~~~~~~~~~~~~~~
+./src/main.c:147:13: warning: implicit declaration of function ‘getch’; did you mean ‘getc’? [-Wimplicit-function-declaration]
+  147 |             getch();
+      |             ^~~~~
+      |             getc
+/usr/bin/ld: /tmp/ccrncm2m.o:(.bss+0x0): multiple definition of `NUM_PARTITIONS'; /tmp/ccGVSnQ3.o:(.bss+0x0): first defined here
+/usr/bin/ld: /tmp/ccrncm2m.o:(.bss+0x4): multiple definition of `INT_MAX'; /tmp/ccGVSnQ3.o:(.bss+0x4): first defined here
+/usr/bin/ld: /tmp/cco2TLFE.o:(.bss+0x0): multiple definition of `NUM_PARTITIONS'; /tmp/ccGVSnQ3.o:(.bss+0x0): first defined here
+/usr/bin/ld: /tmp/cco2TLFE.o:(.bss+0x4): multiple definition of `INT_MAX'; /tmp/ccGVSnQ3.o:(.bss+0x4): first defined here
+/usr/bin/ld: /tmp/cc3iCWKA.o:(.bss+0x0): multiple definition of `NUM_PARTITIONS'; /tmp/ccGVSnQ3.o:(.bss+0x0): first defined here
+/usr/bin/ld: /tmp/cc3iCWKA.o:(.bss+0x4): multiple definition of `INT_MAX'; /tmp/ccGVSnQ3.o:(.bss+0x4): first defined here
+/usr/bin/ld: /tmp/ccGGGdxZ.o:(.bss+0x0): multiple definition of `NUM_PARTITIONS'; /tmp/ccGVSnQ3.o:(.bss+0x0): first defined here
+/usr/bin/ld: /tmp/ccGGGdxZ.o:(.bss+0x4): multiple definition of `INT_MAX'; /tmp/ccGVSnQ3.o:(.bss+0x4): first defined here
+/usr/bin/ld: /tmp/cci5y4Ji.o:(.bss+0x0): multiple definition of `NUM_PARTITIONS'; /tmp/ccGVSnQ3.o:(.bss+0x0): first defined here
+/usr/bin/ld: /tmp/cci5y4Ji.o:(.bss+0x4): multiple definition of `INT_MAX'; /tmp/ccGVSnQ3.o:(.bss+0x4): first defined here
+/usr/bin/ld: /tmp/ccD1NTHQ.o:(.bss+0x0): multiple definition of `NUM_PARTITIONS'; /tmp/ccGVSnQ3.o:(.bss+0x0): first defined here
+/usr/bin/ld: /tmp/ccD1NTHQ.o:(.bss+0x4): multiple definition of `INT_MAX'; /tmp/ccGVSnQ3.o:(.bss+0x4): first defined here
+/usr/bin/ld: /tmp/cci5y4Ji.o: in function `main':
+main.c:(.text+0x5ea): undefined reference to `getch'
+collect2: error: ld returned 1 exit status

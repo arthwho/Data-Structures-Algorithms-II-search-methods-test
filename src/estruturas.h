@@ -49,6 +49,18 @@ typedef struct livro{
 
 } TLivro;
 
+typedef enum {
+    FUNCIONARIO,
+    LIVRO
+} TipoRegistro;
+
+typedef struct{
+
+    float tempo;
+    int num_registro_per_partition;
+    int num_partitions;
+} intercalacao_otima_struct;
+
 /*************************************************
  * Funcoes de Funcionario
 **************************************************/
@@ -82,5 +94,31 @@ void imprimeLivro(TLivro *livro); // Imprimir o funcionario
 void criarBaseDeLivros(FILE *saida, int tamanho); // Incluir o funcionario
 void shuffle_livro(int *vet, int size); // Muda se precisar
 void imprimirBaseDeLivros(FILE *saida); // Mudar
+
+/*************************************************
+ * Funcoes de ordenação
+**************************************************/
+
+void insertionSort(FILE *arq, int tam);
+void insertionSort_livros(FILE *arq, int tam);
+
+void quicksort_employees(FILE *arq, int tam);
+void quicksort_books(FILE *arq, int tam);
+void quicksort_both();
+void printLivroCodes(FILE *arq, int tam);
+void printFuncCodes(FILE *Larq, int tam);
+
+/*************************************************
+ * Funcoes de intercalacao
+**************************************************/
+
+
+int compare_records(const void *a, const void *b, TipoRegistro tipo);
+
+intercalacao_otima_struct* save_intercalacao_otima_struct(int num_partitions, int num_registro_per_partition, float tempo);
+
+void intercalacao_otima_Func();
+void intercalacao_otima_Livro();
+void intercalacoes_otimas();
 
 #endif // ESTRUTURAS_H

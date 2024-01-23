@@ -1,6 +1,5 @@
 
-#include "quickSort.h"
-#include <time.h>
+#include "estruturas.h"
 
 void quicksort_employees(FILE *arq, int tam) {
     TFunc *funcionarios = (TFunc *)malloc(tam * sizeof(TFunc));

@@ -1,4 +1,4 @@
-#include "insertionSort.h"
+#include "estruturas.h"
 
 void insertionSort(FILE *arq, int tam) {
     TFunc *funcionarios = (TFunc *)malloc(tam * sizeof(TFunc));
