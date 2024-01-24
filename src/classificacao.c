@@ -1,4 +1,4 @@
-#include "classificacao.h"
+#include "estruturas.h"
 
 int classificacao_interna_Func(int M) {
     FILE *arq = fopen(EMPLOYEE_FILE_PATH, "rb+");

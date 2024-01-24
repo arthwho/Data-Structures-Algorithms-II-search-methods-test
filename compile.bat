@@ -10,8 +10,6 @@ gcc -o %output_executable% .\src\*.c >> output.log 2>&1
 :: Check if compilation was successful
 if %errorlevel% equ 0 (
   echo Compilation successful. Executable: %output_executable%
-  
-  :: Remove the output.log file if compilation was successful
-else (
-  echo Compilation failed. Check output.log for details.
+
 )
+  

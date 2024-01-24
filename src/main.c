@@ -1,8 +1,5 @@
 #include "estruturas.h" 
 
-#include "buscas.h"
-#include "classificacao.h"
-
 int main()
 {
     FILE *arq,*Larq,*log;

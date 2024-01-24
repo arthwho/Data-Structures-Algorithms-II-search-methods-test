@@ -1,9 +1,4 @@
-#include "buscas.h"   
-
-typedef struct LogFileBinary{
-    int iteracoes;
-    double tempo_ms;
-} TLogBinary;
+#include "estruturas.h"   
 
 void salvar_log_file_binary(FILE *out, int iteracoes, double tempo_ms) {
     TLogBinary *e = (TLogBinary *)malloc(sizeof(TLogBinary));

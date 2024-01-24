@@ -14,6 +14,7 @@
 #include <time.h>
 #include <math.h>
 #include <stdarg.h>
+#include <conio.h>
 
 /*************************************************
  * Defines and utils
@@ -61,6 +62,20 @@ typedef struct{
     int num_partitions;
 } intercalacao_otima_struct;
 
+typedef struct{
+
+    float tempo;
+    int num_registro_per_partition;
+    int num_partitions;
+} classificacao_struct;
+
+
+typedef struct LogFileBinary{
+    int iteracoes;
+    double tempo_ms;
+} TLogBinary;
+
+
 /*************************************************
  * Funcoes de Funcionario
 **************************************************/
@@ -86,7 +101,7 @@ int tamanho_registro_livro();
 int tamanho_arquivo_livro(FILE *arquivo);
 
 TLivro *livro(int id, char *titulo, char *autor, TFunc *funcionario);
-TLivro *criar_livro(int id, char *titulo, char *autor, TFunc *func);
+TLivro *criar_livro(int id, char *titulo, char *autor);
 TLivro *leLivro(FILE *entrada); // Ler o funcionario
 
 void salvaLivro(TLivro *livro, FILE *saida); // Salvar o funcionario
@@ -94,6 +109,16 @@ void imprimeLivro(TLivro *livro); // Imprimir o funcionario
 void criarBaseDeLivros(FILE *saida, int tamanho); // Incluir o funcionario
 void shuffle_livro(int *vet, int size); // Muda se precisar
 void imprimirBaseDeLivros(FILE *saida); // Mudar
+
+/*************************************************
+ * Funcoes de busca
+**************************************************/
+
+TFunc *buscarFuncionario_binariamente(int chave, FILE *arquivo, int tam, FILE *LogFileBinary);
+TFunc *buscaSequencial(int chave, FILE *in);
+TLivro *buscarLivro_binariamente(int chave, FILE *arquivo, int tam, FILE *LogFileBinary);
+
+void salvar_log_file_binary(FILE *out, int iteracoes, double tempo_ms);
 
 /*************************************************
  * Funcoes de ordenação
@@ -112,7 +137,6 @@ void printFuncCodes(FILE *Larq, int tam);
  * Funcoes de intercalacao
 **************************************************/
 
-
 int compare_records(const void *a, const void *b, TipoRegistro tipo);
 
 intercalacao_otima_struct* save_intercalacao_otima_struct(int num_partitions, int num_registro_per_partition, float tempo);
@@ -120,5 +144,13 @@ intercalacao_otima_struct* save_intercalacao_otima_struct(int num_partitions, in
 void intercalacao_otima_Func();
 void intercalacao_otima_Livro();
 void intercalacoes_otimas();
+
+/*************************************************
+ * Funcoes de classificacao
+**************************************************/
+
+int classificacao_interna_Func(int M);
+int classificacao_interna_Livro(int M);
+void classificacoes(int M);
 
 #endif // ESTRUTURAS_H

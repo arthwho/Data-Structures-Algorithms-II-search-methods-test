@@ -180,14 +180,13 @@ int tamanho_arquivo_livro(FILE *Larquivo) {
     return num_registros;
 }
 
-TLivro *criar_livro(int id, char *titulo, char *autor, TFunc *func) {
+TLivro *criar_livro(int id, char *titulo, char *autor) {
     TLivro *livro = (TLivro *) malloc(sizeof(TLivro));
     TFunc *funcionario = (TFunc *) malloc(sizeof(TFunc));
     if (livro) memset(livro, 0, sizeof(TLivro));
     livro->id = id;
     strcpy(livro->titulo, titulo);
     strcpy(livro->autor, autor);
-    strcpy(livro->funcionario->nome, func->nome);
 
     return livro;
 }
@@ -221,8 +220,16 @@ void imprimeLivro(TLivro *j) {
 void criarBaseDeLivros(FILE *saida, int tamanho) {
 
     int vet[tamanho];
-    TLivro *K;
+    TLivro *K = (TLivro *) malloc(sizeof(TLivro));
     TFunc *funcionario = (TFunc *) malloc(sizeof(TFunc));
+
+    funcionario->cod = 1;
+    strcpy(funcionario->nome, "Funcionario");
+    strcpy(funcionario->cpf, "000-XXXX-000");
+    strcpy(funcionario->data_nascimento, "01/01/1980");
+    funcionario->salario = 0;
+
+    K->funcionario = funcionario;
 
     for (int i = 0; i < tamanho; i++)
         vet[i] = i + 1;
@@ -230,10 +237,11 @@ void criarBaseDeLivros(FILE *saida, int tamanho) {
     shuffle(vet, tamanho);
 
     for (int i = 0; i < tamanho; i++) {
-        K = criar_livro(vet[i], "Titulo", "Autor Desconhecido", funcionario);
+        K = criar_livro(vet[i], "Titulo", "Autor Desconhecido");
         salvaLivro(K, saida);
     }
 
+    free(funcionario);
     free(K);
 }
 
