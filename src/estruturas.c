@@ -224,12 +224,10 @@ void criarBaseDeLivros(FILE *saida, int tamanho) {
     TFunc *funcionario = (TFunc *) malloc(sizeof(TFunc));
 
     funcionario->cod = 1;
-    strcpy(funcionario->nome, "Funcionario");
+    strcpy(funcionario->nome, "A B da Silva");
     strcpy(funcionario->cpf, "000-XXXX-000");
     strcpy(funcionario->data_nascimento, "01/01/1980");
     funcionario->salario = 0;
-
-    K->funcionario = funcionario;
 
     for (int i = 0; i < tamanho; i++)
         vet[i] = i + 1;
@@ -238,11 +236,12 @@ void criarBaseDeLivros(FILE *saida, int tamanho) {
 
     for (int i = 0; i < tamanho; i++) {
         K = criar_livro(vet[i], "Titulo", "Autor Desconhecido");
+        K->funcionario = funcionario;
         salvaLivro(K, saida);
+        free(K);
     }
 
-    free(funcionario);
-    free(K);
+    //free(funcionario);
 }
 
 void imprimirBaseDeLivros(FILE *saida) {
@@ -259,10 +258,10 @@ void imprimirBaseDeLivros(FILE *saida) {
     //     }
 
         rewind(saida);
-        TLivro *l;
+        TLivro *l = (TLivro *) malloc(sizeof(TLivro));
         printf("%-10s %-20s %-20s %-10s\n\n", "ID", "Titulo", "Autor", "Funcionario");
 
-        while ((l = leLivro(saida)) != NULL)
+        while (fread(l, sizeof(TLivro), 1, saida))
 
             imprimeLivro(l);
 

@@ -30,7 +30,7 @@ int main()
 
             int op;
             criarBase(arq, 1000);
-            criarBaseDeLivros(Larq, 1000);
+            criarBaseDeLivros(Larq, 10);
             printf("\033[H\033[J"); // Limpa a tela, melhor que system("cls") e é multiplataforma.
             gotoxy(15,5);
             printf("1. Imprimir base de dados de funcionarios: ");
