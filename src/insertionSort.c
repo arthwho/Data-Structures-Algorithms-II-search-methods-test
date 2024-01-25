@@ -49,24 +49,28 @@ void insertionSort(FILE *arq, int tam) {
 }
 
 void insertionSort_livros(FILE *arq, int tam) {
+    // Allocate memory for an array of TLivro structures
     TLivro *livros = (TLivro *)malloc(tam * sizeof(TLivro));
+
     arq = fopen(BOOK_FILE_PATH, "r+b");
-    if (arq == NULL) {
-        printf("Erro ao abrir arquivo.\n");
-        exit(1);
-    }
-    printf("Debug: Insertion Sort Livros Iniciado, tam = %d\n", tam);
 
     // Read all records into an array
     fseek(arq, 0, SEEK_SET);
     for (int i = 0; i < tam; i++) {
-        fread(&livros[i].id, sizeof(int), 1, arq);
-        fread(livros[i].titulo, sizeof(char), sizeof(livros[i].titulo), arq);
-        fread(livros[i].autor, sizeof(char), sizeof(livros[i].titulo), arq);
+        fread(&livros[i], sizeof(TLivro), 1, arq);
+    }
+
+    // Filter out books with invalid IDs
+    int validCount = 0;
+    for (int i = 0; i < tam; i++) {
+        if (livros[i].id > 0 && livros[i].id <= tam) {
+            livros[validCount] = livros[i];
+            validCount++;
+        }
     }
 
     // Perform insertion sort on the array
-    for (int j = 1; j < tam; j++) {
+    for (int j = 1; j < validCount; j++) {
         TLivro key = livros[j];
         int i = j - 1;
 
@@ -78,16 +82,19 @@ void insertionSort_livros(FILE *arq, int tam) {
         livros[i + 1] = key;
     }
 
+    arq = fopen(BOOK_FILE_PATH, "w+b");
+
     // Write the sorted array back to the file
     fseek(arq, 0, SEEK_SET);
-    for (int i = 0; i < tam; i++) {
-        fwrite(&livros[i].id, sizeof(int), 1, arq);
-        fwrite(livros[i].titulo, sizeof(char), sizeof(livros[i].titulo), arq);
-        fwrite(livros[i].autor, sizeof(char), sizeof(livros[i].autor), arq);
+    for (int i = 0; i < validCount; i++) {
+        fwrite(&livros[i], sizeof(TLivro), 1, arq);
     }
 
+    // Free the array of TLivro structures
     free(livros);
 
-    //printf("Debug: Insertion Sort Funcionarios Finalizado\n");
+    // Flush changes to the file
     fflush(arq);
+
+    printf("Debug: Insertion Sort Livros Finalizado\n");
 }

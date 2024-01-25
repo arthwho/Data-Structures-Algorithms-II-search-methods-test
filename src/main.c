@@ -114,7 +114,9 @@ int main()
                 break;
 
             case 7:
+                printf("\033[H\033[J");
                 insertionSort_livros(Larq, tamanho_arquivo_livro(Larq));
+                system("pause");
                 imprimirBaseDeLivros(Larq);
                 break;
 
@@ -126,11 +128,11 @@ int main()
                 break;
 
             case 9:
-                classificacao_interna_Func(100);
+                classificacao_interna_Func(1);
                 break;
 
             case 10:
-                classificacao_interna_Livro(100);
+                classificacao_interna_Livro(1);
                 break;
 
             case 11:

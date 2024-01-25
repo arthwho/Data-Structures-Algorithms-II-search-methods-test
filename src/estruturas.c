@@ -209,6 +209,7 @@ TLivro *leLivro(FILE *entrada) {
 
 //Imprime um livro
 void imprimeLivro(TLivro *j) {
+    
     //printf("ID: %d\n", livro->id);
     //printf("Titulo: %s\n", livro->titulo);
     //printf("Autor: %s\n", livro->autor);

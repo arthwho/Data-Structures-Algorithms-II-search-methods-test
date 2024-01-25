@@ -47,7 +47,6 @@ typedef struct livro{
     char titulo[50];
     char autor[50];
     TFunc *funcionario;
-
 } TLivro;
 
 typedef enum {
