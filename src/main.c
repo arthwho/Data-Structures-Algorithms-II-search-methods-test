@@ -2,7 +2,7 @@
 
 int main()
 {
-    FILE *arq,*Larq,*log;
+    FILE *arq,*Larq,*log,*index;
     TFunc *f = (TFunc *)malloc(sizeof(TFunc));
     TLivro *l = (TLivro *)malloc(sizeof(TLivro));
 
@@ -25,11 +25,15 @@ int main()
         printf("Erro ao abrir arquivo de logs\n");
         exit(1);
         }
+        if ((index = fopen(INDEX_FILE_PATH, "w+b")) == NULL) {
+        printf("Erro ao abrir arquivo Index\n");
+        exit(1);
+        }
 
         else{
 
             int op;
-            criarBase(arq, 1000);
+            criarBase(arq, 10);
             criarBaseDeLivros(Larq, 10);
             printf("\033[H\033[J"); // Limpa a tela, melhor que system("cls") e é multiplataforma.
             gotoxy(15,5);
@@ -116,7 +120,6 @@ int main()
             case 7:
                 printf("\033[H\033[J");
                 insertionSort_livros(Larq, tamanho_arquivo_livro(Larq));
-                system("pause");
                 imprimirBaseDeLivros(Larq);
                 break;
 

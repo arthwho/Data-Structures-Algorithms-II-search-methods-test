@@ -2,7 +2,7 @@
 
 void insertionSort(FILE *arq, int tam) {
     TFunc *funcionarios = (TFunc *)malloc(tam * sizeof(TFunc));
-    arq = fopen("funcionario.dat", "r+b");
+    arq = fopen(EMPLOYEE_FILE_PATH, "r+b");
     if (arq == NULL) {
         printf("Erro ao abrir arquivo.\n");
         exit(1);

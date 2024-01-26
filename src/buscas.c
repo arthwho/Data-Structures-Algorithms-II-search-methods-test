@@ -18,7 +18,7 @@ TFunc *buscarFuncionario_binariamente(int chave, FILE *arquivo, int tam, FILE *L
         printf("Erro ao abrir arquivo.\n");
         exit(1);
     }
-
+    insertionSort(arquivo, tam);
     int esq = 0;
     int dir = tam - 1;
     int iteracoes = 0;
@@ -93,7 +93,7 @@ TLivro *buscarLivro_binariamente(int chave, FILE *Larquivo, int siz, FILE *LogFi
         printf("Erro ao abrir arquivo.\n");
         exit(1);
     }
-
+    insertionSort_livros(Larquivo, siz);
     int esq = 0;
     int dir = siz - 1;
     int iteracoes = 0;
@@ -104,7 +104,7 @@ TLivro *buscarLivro_binariamente(int chave, FILE *Larquivo, int siz, FILE *LogFi
     scanf("%i",&chave);
 
     gotoxy(0,5);
-    printf("%-10s %-20s %-20s\n\n", "COD", "Titulo", "Autor");
+    printf("%-10s %-20s %-20s %-10s\n\n", "ID", "Titulo", "Autor", "Funcionario");
 
     while (esq <= dir) {
         int meio = esq + (dir - esq) / 2;
