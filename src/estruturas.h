@@ -24,11 +24,13 @@
 #define PARTITIONS_PATH "src/bin/partitions"
 #define BOOK_FILE_PATH "src/bin/window_books.dat"
 #define LOG_FILE_PATH "src/bin/window_log.dat"
+#define INDEX_FILE_PATH "src/bin/window_index.dat"
 
 int NUM_PARTITIONS;
 int INT_MAX;
 
 void gotoxy(int x,int y);
+int compare(const void *a, const void *b);
 
 /*************************************************
  * Structs
@@ -47,7 +49,6 @@ typedef struct livro{
     char titulo[50];
     char autor[50];
     TFunc *funcionario;
-
 } TLivro;
 
 typedef enum {
@@ -75,6 +76,10 @@ typedef struct LogFileBinary{
     double tempo_ms;
 } TLogBinary;
 
+typedef struct {
+    int key;
+    long position;
+} Index;
 
 /*************************************************
  * Funcoes de Funcionario
@@ -89,8 +94,8 @@ TFunc *le(FILE *in);
 
 void salva(TFunc *func, FILE *out);
 void imprime(TFunc *func);
-void criarBase(FILE *out, int tam);
 void shuffle(int *vet, int size);
+void criarBase(FILE *out, int tam);
 void imprimirBase(FILE *out);
 
 /*************************************************

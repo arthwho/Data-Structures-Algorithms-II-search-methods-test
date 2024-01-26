@@ -6,6 +6,7 @@ int classificacao_interna_Func(int M) {
 
     int reg = 0;
     int nFunc = tamanho_arquivo(arq);
+    printf("Debug: nFunc = %d\n", nFunc);
     int qtdParticoes = 0;
     int t = sizeof(TFunc);
     char nomeParticao[20];
@@ -79,11 +80,12 @@ int classificacao_interna_Func(int M) {
 }
 
 int classificacao_interna_Livro(int M) {
-    FILE *arq = fopen(BOOK_FILE_PATH, "rb+");
+    FILE *arq = fopen(BOOK_FILE_PATH, "r+b");
     rewind(arq);
 
     int reg = 0;
     int nLivros = tamanho_arquivo_livro(arq);
+    printf("Debug: nLivros = %d\n", nLivros);
     int qtdParticoes = 0;
     int t = sizeof(TLivro);
     char nomeParticao[20];

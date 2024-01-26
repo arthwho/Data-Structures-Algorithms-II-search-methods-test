@@ -9,6 +9,12 @@ void gotoxy(int x,int y)
     printf("%c[%d;%df",0x1B,y,x);
 }
 
+int compare(const void *a, const void *b) {
+    int num1 = *(int *)a;
+    int num2 = *(int *)b;
+    return num1 - num2;
+}
+
 /**************************************************************************************************
  * Funções de manipulação de funcionários
 **************************************************************************************************/
@@ -98,6 +104,16 @@ void imprime(TFunc *func) {
     printf("%-10d %-20s %-20s %-10s %10.2f\n\n", func->cod, func->nome, func->cpf, func->data_nascimento, func->salario);
 }
 
+//embaralha base de dados
+void shuffle(int *vet, int size) {
+    srand(time(NULL));
+    for (int i = size - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+        int tmp = vet[j];
+        vet[j] = vet[i];
+        vet[i] = tmp;
+    }
+}
 
 // Cria a base de dados
 void criarBase(FILE *out, int tam){
@@ -113,23 +129,11 @@ void criarBase(FILE *out, int tam){
     printf("\nGerando a base de dados de funcionarios...\n");
 
     for (int i = 0; i < tam; i++) {
-    Z = funcionario(i, "A", "000-XXXX-000", "01/01/1980", 0 * i);
+    Z = funcionario(vet[i], "A B da Silva", "000-XXXX-000", "01/01/1980", 0 * i);
     salva(Z, out);
     free(Z);  // Libera a cada iteração para evitar vazamento de memória
     }
 }
-
-//embaralha base de dados
-void shuffle(int *vet, int size) {
-    srand(time(NULL));
-    for (int i = size - 1; i > 0; i--) {
-        int j = rand() % (i + 1);
-        int tmp = vet[j];
-        vet[j] = vet[i];
-        vet[i] = tmp;
-    }
-}
-
 
 void imprimirBase(FILE *out){
 
@@ -209,6 +213,7 @@ TLivro *leLivro(FILE *entrada) {
 
 //Imprime um livro
 void imprimeLivro(TLivro *j) {
+    
     //printf("ID: %d\n", livro->id);
     //printf("Titulo: %s\n", livro->titulo);
     //printf("Autor: %s\n", livro->autor);
