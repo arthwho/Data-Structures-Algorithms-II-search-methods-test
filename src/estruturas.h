@@ -25,7 +25,7 @@
 #define BOOK_FILE_PATH "src/bin/window_books.dat"
 #define LOG_FILE_PATH "src/bin/window_log.dat"
 #define INDEX_FILE_PATH "src/bin/window_index.dat"
-
+#define PARTITIONS_PER_STRUCTS 10
 int NUM_PARTITIONS;
 int INT_MAX;
 
@@ -154,8 +154,7 @@ void intercalacoes_otimas();
  * Funcoes de classificacao
 **************************************************/
 
-int classificacao_interna_Func(int M);
-int classificacao_interna_Livro(int M);
+void classificacao_interna_Func(char* filename, int size);
+void classificacao_interna_livro(char* filename, int size);
 void classificacoes(int M);
-
 #endif // ESTRUTURAS_H

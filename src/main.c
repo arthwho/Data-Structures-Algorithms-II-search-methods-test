@@ -13,11 +13,11 @@ int main()
 
         printf("\033[H\033[J");
 
-        if ((arq = fopen(EMPLOYEE_FILE_PATH, "w+b")) == NULL) {
+        if ((arq = fopen(EMPLOYEE_FILE_PATH, "r+b")) == NULL) {
         printf("Erro ao abrir arquivo de funcionarios\n");
         exit(1);
         }
-        if ((Larq = fopen(BOOK_FILE_PATH, "w+b")) == NULL) {
+        if ((Larq = fopen(BOOK_FILE_PATH, "r+b")) == NULL) {
         printf("Erro ao abrir arquivo de livros\n");
         exit(1);
         }
@@ -131,11 +131,11 @@ int main()
                 break;
 
             case 9:
-                classificacao_interna_Func(1);
+                classificacao_interna_Func(EMPLOYEE_FILE_PATH,sizeof(TFunc));
                 break;
 
             case 10:
-                classificacao_interna_Livro(1);
+                classificacao_interna_livro(BOOK_FILE_PATH,sizeof(TLivro));
                 break;
 
             case 11:
