@@ -274,7 +274,7 @@ void imprimirBaseDeLivros(FILE *saida) {
 
 }
 
-void splitFiles(char* filename, int size) {
+void classificacao_interna_Func(char* filename, int size) {
     char buf[size];
     int i = 0;
     FILE* source = fopen(filename, "rb");
@@ -298,7 +298,7 @@ void splitFiles(char* filename, int size) {
     fclose(source);
 }
 
-void splitBookFiles(char* filename, int size) {
+void classificacao_interna_livro(char* filename, int size) {
     char buf[size];
     int i = 0;
     FILE* source = fopen(filename, "rb");

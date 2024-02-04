@@ -131,11 +131,11 @@ int main()
                 break;
 
             case 9:
-                splitFiles(EMPLOYEE_FILE_PATH,sizeof(TFunc));
+                classificacao_interna_Func(EMPLOYEE_FILE_PATH,sizeof(TFunc));
                 break;
 
             case 10:
-                splitBookFiles(BOOK_FILE_PATH,sizeof(TLivro));
+                classificacao_interna_livro(BOOK_FILE_PATH,sizeof(TLivro));
                 break;
 
             case 11:

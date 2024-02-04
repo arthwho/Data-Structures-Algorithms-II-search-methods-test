@@ -154,9 +154,7 @@ void intercalacoes_otimas();
  * Funcoes de classificacao
 **************************************************/
 
-int classificacao_interna_Func(int M);
-int classificacao_interna_Livro(int M);
+void classificacao_interna_Func(char* filename, int size);
+void classificacao_interna_livro(char* filename, int size);
 void classificacoes(int M);
-void splitFiles(char* filename, int size);
-void splitBookFiles(char* filename, int size);
 #endif // ESTRUTURAS_H
