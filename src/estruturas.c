@@ -273,3 +273,51 @@ void imprimirBaseDeLivros(FILE *saida) {
         free(l);
 
 }
+
+void splitFiles(char* filename, int size) {
+    char buf[size];
+    int i = 0;
+    FILE* source = fopen(filename, "rb");
+    if (source == NULL) {
+        printf("Arquivo fonte nao encontrado.\n");
+        return;
+    }
+    while (!feof(source)) {
+        char newFilename[64];
+        sprintf(newFilename, "./src/bin/partitions/partition%d.txt", i);
+        FILE* dest = fopen(newFilename, "wb");
+        if (dest == NULL) {
+            printf("Pasta destino nao encontrada.\n");
+            return;
+        }
+        size_t count = fread(buf, 1, size, source);
+        fwrite(buf, 1, count, dest);
+        fclose(dest);
+        i++;
+    }
+    fclose(source);
+}
+
+void splitBookFiles(char* filename, int size) {
+    char buf[size];
+    int i = 0;
+    FILE* source = fopen(filename, "rb");
+    if (source == NULL) {
+        printf("Arquivo fonte nao encontrado.\n");
+        return;
+    }
+    size_t count;
+    while ((count = fread(buf, 1, size, source)) > 0) {
+        char newFilename[64];
+        sprintf(newFilename, "./src/bin/partitions/partitionB%d.txt", i);
+        FILE* dest = fopen(newFilename, "wb");
+        if (dest == NULL) {
+            printf("Pasta destino nao encontrada.\n");
+            return;
+        }
+        fwrite(buf, 1, count, dest);
+        fclose(dest);
+        i++;
+    }
+    fclose(source);
+}
