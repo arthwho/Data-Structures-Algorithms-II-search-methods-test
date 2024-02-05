@@ -5,6 +5,7 @@ int main()
     FILE *arq,*Larq,*log,*index;
     TFunc *f = (TFunc *)malloc(sizeof(TFunc));
     TLivro *l = (TLivro *)malloc(sizeof(TLivro));
+    HashTable *hashTable = (HashTable *)malloc(sizeof(HashTable));
 
     clock_t start, end;
     double cpu_time_used;
@@ -29,6 +30,12 @@ int main()
         printf("Erro ao abrir arquivo Index\n");
         exit(1);
         }
+        if (myHashTable == NULL) {
+            myHashTable = loadHashTable(); // If the hash table is not initialized, initialize it from the file
+            if (myHashTable == NULL) { // If the file does not exist, create a new hash table 
+                    myHashTable = createHashTable();
+                }
+        }
 
         else{
 
@@ -52,15 +59,21 @@ int main()
             printf("7. Realizar insertion sort de livros: ");
             gotoxy(70,11);
             printf("8. Realizar quick sort de funcionarios e livros:");
-            gotoxy(15,15);
+            gotoxy(15,13);
             printf("9. Realizar classificacao de funcionarios: ");
-            gotoxy(70,15);
+            gotoxy(70,13);
             printf("10. Realizar classificacao de livros: ");
             gotoxy(15,17);
             printf("11. Realizar intercalacao otima: ");
-            gotoxy(15,20);
+            gotoxy(15,19);
+            printf("12. Inserir na tabela hash: ");
+            gotoxy(70,17);
+            printf("13. Pesquisar na tabela hash: ");
+            gotoxy(70,19);
+            printf("14. Remover da tabela hash: ");
+            gotoxy(15,24);
             printf("0. Sair: ");
-            gotoxy(15,22);
+            gotoxy(15,26);
             printf("Digite a opcao desejada: ");
             scanf("%d", &op);
 
@@ -140,6 +153,45 @@ int main()
 
             case 11:
                 intercalacoes_otimas();
+                break;
+
+            case 12: {
+                printf("\033[H\033[J");
+                TLivro livroToInsert;
+                gotoxy(10,3);
+                printf("Digite o codigo do livro a ser inserido: ");
+                scanf("%d", &livroToInsert.id);
+                gotoxy(10,5);
+                printf("Digite a tabela a ser inserido: ");
+                int keyToInsert;
+                scanf("%d", &keyToInsert);
+                insert_hash(hashTable, keyToInsert, livroToInsert);
+                break;
+            }
+
+            case 13: {
+                printf("\033[H\033[J");
+                gotoxy(10,3);
+                printf("Digite o codigo do livro a ser pesquisado: ");
+                int keyToSearch;
+                scanf("%d", &keyToSearch);
+                TLivro foundLivro = search_hash(hashTable, keyToSearch);
+                if (foundLivro.id != -1) {
+                    // Print the found livro data
+                    printf("Livro encontrado: %d\n", foundLivro.id);
+                } else {
+                    printf("Livro nao encontrado na tabela\n");
+                }
+                break;
+            }
+
+            case 14:
+                printf("\033[H\033[J");
+                gotoxy(10,3);
+                printf("Digite o codigo do livro a ser removido: ");
+                int keyToRemove;
+                scanf("%d", &keyToRemove);
+                remove_hash(hashTable, keyToRemove);
                 break;
 
             default:

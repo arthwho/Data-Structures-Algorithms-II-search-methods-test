@@ -16,15 +16,18 @@
 #include <stdarg.h>
 #include <conio.h>
 
+
 /*************************************************
  * Defines and utils
 **************************************************/
 
+#define TABLE_SIZE 17 // hash table divisor
 #define EMPLOYEE_FILE_PATH "src/bin/window_employee.dat"
 #define PARTITIONS_PATH "src/bin/partitions"
 #define BOOK_FILE_PATH "src/bin/window_books.dat"
 #define LOG_FILE_PATH "src/bin/window_log.dat"
 #define INDEX_FILE_PATH "src/bin/window_index.dat"
+#define HASH_TABLE_PATH "src/bin/hashTable.dat" // Path da tabela hash
 #define PARTITIONS_PER_STRUCTS 10
 int NUM_PARTITIONS;
 int INT_MAX;
@@ -81,10 +84,22 @@ typedef struct {
     long position;
 } Index;
 
+// Nó para a lista encadeada
+typedef struct Node {
+    int key;
+    TLivro livro;
+    struct Node *next;
+} Node;
+
+// Tabela Hash
+typedef struct HashTable {
+    Node *table[TABLE_SIZE];
+} HashTable;
+
+
 /*************************************************
  * Funcoes de Funcionario
 **************************************************/
-
 
 int tamanho_registro();
 int tamanho_arquivo(FILE *arquivo);
@@ -97,6 +112,7 @@ void imprime(TFunc *func);
 void shuffle(int *vet, int size);
 void criarBase(FILE *out, int tam);
 void imprimirBase(FILE *out);
+
 
 /*************************************************
  * Funcoes de Livro
@@ -115,6 +131,7 @@ void criarBaseDeLivros(FILE *saida, int tamanho); // Incluir o funcionario
 void shuffle_livro(int *vet, int size); // Muda se precisar
 void imprimirBaseDeLivros(FILE *saida); // Mudar
 
+
 /*************************************************
  * Funcoes de busca
 **************************************************/
@@ -124,6 +141,7 @@ TFunc *buscaSequencial(int chave, FILE *in);
 TLivro *buscarLivro_binariamente(int chave, FILE *arquivo, int tam, FILE *LogFileBinary);
 
 void salvar_log_file_binary(FILE *out, int iteracoes, double tempo_ms);
+
 
 /*************************************************
  * Funcoes de ordenação
@@ -138,6 +156,7 @@ void quicksort_both();
 void printLivroCodes(FILE *arq, int tam);
 void printFuncCodes(FILE *Larq, int tam);
 
+
 /*************************************************
  * Funcoes de intercalacao
 **************************************************/
@@ -150,6 +169,7 @@ void intercalacao_otima_Func();
 void intercalacao_otima_Livro();
 void intercalacoes_otimas();
 
+
 /*************************************************
  * Funcoes de classificacao
 **************************************************/
@@ -157,4 +177,22 @@ void intercalacoes_otimas();
 void classificacao_interna_Func(char* filename, int size);
 void classificacao_interna_livro(char* filename, int size);
 void classificacoes(int M);
+
+
+/*************************************************
+ * Funcoes hash
+**************************************************/
+
+
+int hash(int key);
+void insert_hash(HashTable *ht, int key, TLivro livro);
+TLivro search_hash(HashTable *ht, int key);
+void remove_hash(HashTable *ht, int key);
+void saveHashTable(HashTable *ht);
+HashTable *loadHashTable();
+void printLivroInfo(TLivro livro);
+HashTable *createHashTable();
+
+#define MY_HASH_TABLE_SIZE 10
+HashTable *myHashTable;
 #endif // ESTRUTURAS_H

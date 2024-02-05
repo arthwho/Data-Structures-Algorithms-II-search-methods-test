@@ -274,6 +274,11 @@ void imprimirBaseDeLivros(FILE *saida) {
 
 }
 
+
+/*************************************************
+ * Funcoes de classificacao
+**************************************************/
+
 void classificacao_interna_Func(char* filename, int size) {
     char buf[size];
     int i = 0;
@@ -320,4 +325,119 @@ void classificacao_interna_livro(char* filename, int size) {
         i++;
     }
     fclose(source);
+}
+
+
+/*************************************************
+ * Funcoes hash
+**************************************************/
+
+int hash(int key) {
+    return key % TABLE_SIZE;
+}
+
+// Inserir elemento
+
+void insert_hash(HashTable *ht, int key, TLivro livro) {
+    int index = hash(key);
+
+    Node *newNode = (Node *)malloc(sizeof(Node));
+    newNode->key = key;
+    newNode->livro = livro;
+    newNode->next = ht->table[index];
+    ht->table[index] = newNode;
+
+    printf("\nLivro inserido na tabela %d\n", index);
+}
+
+// Buscar elemento
+TLivro search_hash(HashTable *ht, int key) {
+    int index = hash(key);
+    Node *node = ht->table[index];
+    while (node != NULL) {
+        if (node->key == key) {
+            printf("Livro encontrado na tabela %d\n", index);
+            return node->livro;
+        }
+        node = node->next;
+    }
+
+    // Retorna uma estrutura de livro com código -1 se não encontrado
+    TLivro notFound;
+    notFound.id = -1;
+    return notFound;
+}
+
+// Remover elemento
+void remove_hash(HashTable *ht, int key) {
+    int index = hash(key);
+    Node *node = ht->table[index];
+    Node *prev = NULL;
+    while (node != NULL) {
+        if (node->key == key) {
+            if (prev == NULL) {
+                ht->table[index] = node->next;
+            } else {
+                prev->next = node->next;
+            }
+            free(node);
+            printf("Livro removido com sucesso.\n");
+            return;
+        }
+        prev = node;
+        node = node->next;
+    }
+
+    printf("Livro com código [%d] não encontrado.\n", key);
+}
+
+// Salvar tabela hash em um arquivo
+void saveHashTable(HashTable *ht) {
+    FILE *file = fopen(HASH_TABLE_PATH, "wb");
+    if (file == NULL) {
+        printf("[+] Debug: Não foi possível abrir o arquivo.\n");
+        return;
+    }
+
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        Node *node = ht->table[i];
+        while (node != NULL) {
+            fwrite(&(node->key), sizeof(int), 1, file);
+            fwrite(&(node->livro), sizeof(TLivro), 1, file);
+            node = node->next;
+        }
+    }
+
+    fclose(file);
+}
+
+// Ler tabela hash de um arquivo
+HashTable *loadHashTable() {
+    FILE *file = fopen(HASH_TABLE_PATH, "rb");
+    if (file == NULL) {
+        printf("[+] Debug: Não foi possível abrir o arquivo.\n");
+        return NULL;
+    }
+
+    HashTable *ht = (HashTable *)malloc(sizeof(HashTable));
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        ht->table[i] = NULL;
+    }
+
+    int key;
+    TLivro livro;
+    while (fread(&key, sizeof(int), 1, file) && fread(&livro, sizeof(TLivro), 1, file)) {
+        insert_hash(ht, key, livro);
+    }
+
+    fclose(file);
+    return ht;
+}
+
+HashTable *createHashTable() {
+    HashTable *ht = (HashTable *)malloc(sizeof(HashTable));
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        ht->table[i] = NULL;
+    }
+    return ht;
 }

@@ -1,0 +1,27 @@
+.\src\main.c: In function 'main':
+.\src\main.c:176:28: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+                 foundLivro = (hashTable, keyToSearch);
+                            ^
+C:\Users\twist\AppData\Local\Temp\ccIXsf26.o:main.c:(.text+0x816): multiple definition of `hash'
+C:\Users\twist\AppData\Local\Temp\cc0WbNqN.o:estruturas.c:(.text+0xc21): first defined here
+C:\Users\twist\AppData\Local\Temp\ccIXsf26.o:main.c:(.text+0x842): multiple definition of `insert_hash'
+C:\Users\twist\AppData\Local\Temp\cc0WbNqN.o:estruturas.c:(.text+0xc4d): first defined here
+C:\Users\twist\AppData\Local\Temp\ccIXsf26.o:main.c:(.text+0x8b9): multiple definition of `search_hash'
+C:\Users\twist\AppData\Local\Temp\cc0WbNqN.o:estruturas.c:(.text+0xcc4): first defined here
+C:\Users\twist\AppData\Local\Temp\ccIXsf26.o:main.c:(.text+0x957): multiple definition of `remove_hash'
+C:\Users\twist\AppData\Local\Temp\cc0WbNqN.o:estruturas.c:(.text+0xd62): first defined here
+C:\Users\twist\AppData\Local\Temp\ccIXsf26.o:main.c:(.text+0x9f0): multiple definition of `saveHashTable'
+C:\Users\twist\AppData\Local\Temp\cc0WbNqN.o:estruturas.c:(.text+0xdfb): first defined here
+C:\Users\twist\AppData\Local\Temp\ccIXsf26.o:main.c:(.text+0xaa8): multiple definition of `loadHashTable'
+C:\Users\twist\AppData\Local\Temp\cc0WbNqN.o:estruturas.c:(.text+0xeb3): first defined here
+C:\Users\twist\AppData\Local\Temp\ccIXsf26.o:main.c:(.text+0xba7): multiple definition of `createHashTable'
+C:\Users\twist\AppData\Local\Temp\cc0WbNqN.o:estruturas.c:(.text+0xfb2): first defined here
+collect2.exe: error: ld returned 1 exit status
+.\src\main.c: In function 'main':
+.\src\main.c:176:28: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+                 foundLivro = (hashTable, keyToSearch);
+                            ^
+.\src\main.c: In function 'main':
+.\src\main.c:176:23: error: incompatible types when assigning to type 'TLivro * {aka struct livro *}' from type 'TLivro {aka struct livro}'
+                 livro = search_hash(hashTable, keyToSearch);
+                       ^
