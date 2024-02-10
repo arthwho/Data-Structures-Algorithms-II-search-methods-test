@@ -14,11 +14,11 @@ int main()
 
         printf("\033[H\033[J");
 
-        if ((arq = fopen(EMPLOYEE_FILE_PATH, "r+b")) == NULL) {
+        if ((arq = fopen(EMPLOYEE_FILE_PATH, "wb+")) == NULL) {
         printf("Erro ao abrir arquivo de funcionarios\n");
         exit(1);
         }
-        if ((Larq = fopen(BOOK_FILE_PATH, "r+b")) == NULL) {
+        if ((Larq = fopen(BOOK_FILE_PATH, "wb+")) == NULL) {
         printf("Erro ao abrir arquivo de livros\n");
         exit(1);
         }
@@ -38,6 +38,8 @@ int main()
         }
 
         else{
+            arq = fopen(EMPLOYEE_FILE_PATH, "rb+");
+            Larq = fopen(BOOK_FILE_PATH, "rb+");
 
             int op;
             criarBase(arq, 10);
@@ -161,11 +163,11 @@ int main()
                 gotoxy(10,3);
                 printf("Digite o codigo do livro a ser inserido: ");
                 scanf("%d", &livroToInsert.id);
-                gotoxy(10,5);
-                printf("Digite a tabela a ser inserido: ");
-                int keyToInsert;
-                scanf("%d", &keyToInsert);
-                insert_hash(hashTable, keyToInsert, livroToInsert);
+                start = clock();
+                insert_hash(hashTable, livroToInsert.id, livroToInsert);
+                end = clock();
+                cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+                printf("\nTempo de execucao: %f\n", cpu_time_used);
                 break;
             }
 
@@ -175,6 +177,7 @@ int main()
                 printf("Digite o codigo do livro a ser pesquisado: ");
                 int keyToSearch;
                 scanf("%d", &keyToSearch);
+                start = clock();
                 TLivro foundLivro = search_hash(hashTable, keyToSearch);
                 if (foundLivro.id != -1) {
                     // Print the found livro data
@@ -182,6 +185,9 @@ int main()
                 } else {
                     printf("Livro nao encontrado na tabela\n");
                 }
+                end = clock();
+                cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+                printf("\nTempo de execucao: %f\n", cpu_time_used);
                 break;
             }
 
@@ -191,12 +197,17 @@ int main()
                 printf("Digite o codigo do livro a ser removido: ");
                 int keyToRemove;
                 scanf("%d", &keyToRemove);
+                start = clock();
                 remove_hash(hashTable, keyToRemove);
+                end = clock();
+                cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+                printf("\nTempo de execucao: %f\n", cpu_time_used);
                 break;
 
             default:
                 break;
             }
+            
             printf("Aperte enter para continuar...\n");
             getch();
 
